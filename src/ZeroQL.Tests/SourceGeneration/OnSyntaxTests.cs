@@ -124,7 +124,7 @@ public class OnSyntaxTests : IntegrationTest
                               Figure = o.On<FigureContent>()
                                   .Select(oo => oo.Figure(ooo => new { Circle = ooo.On<Circle>().Select(oooo => new { oooo.Radius }) })),
                               Int = o.On<IntegerContent>()
-                                  .Select(oo => new { oo.Text }),
+                                  .Select(oo => new { IntText = oo.Text }),
                           })
                           """;
 

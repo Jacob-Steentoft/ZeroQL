@@ -262,6 +262,11 @@ public static class GraphQLQueryResolver
             case AnonymousObjectMemberDeclaratorSyntax anonymousMember:
             {
                 var query = ResolveQuery(context.WithParent(anonymousMember), anonymousMember.Expression);
+                if (query.Value is {} value &&  anonymousMember.NameEquals is not null && !value.StartsWith("..."))
+                {
+                    return $"{anonymousMember.NameEquals.Name}: {value}";
+                }
+                
                 return query;
             }
             case ObjectCreationExpressionSyntax objectCreation:
