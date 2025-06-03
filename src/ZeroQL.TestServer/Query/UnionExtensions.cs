@@ -19,6 +19,15 @@ public class TextContent : IPostContent
     public User Author { get; set; }
 }
 
+public class IntegerContent : IPostContent
+{
+    public int Id { get; set; }
+
+    public int Text { get; set; }
+
+    public User Author { get; set; }
+}
+
 public class ImageContent : IPostContent
 {
     public int Id { get; set; }
@@ -57,7 +66,8 @@ public class UnionExtensions
         {
             GetImage(),
             GetText(),
-            GetFigure()
+            GetFigure(),
+            GetInteger(),
         };
 
         return postContents;
@@ -95,4 +105,11 @@ public class UnionExtensions
                 Radius = 5
             }
         };
+
+    public IntegerContent GetInteger() => new()
+    {
+        Id = 3,
+        Author = User.Create(),
+        Text = 1,
+    };
 }

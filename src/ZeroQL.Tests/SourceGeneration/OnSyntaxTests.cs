@@ -109,6 +109,32 @@ public class OnSyntaxTests : IntegrationTest
 
         await Verify(result);
     }
+    
+    [Fact]
+    public async Task UnionFailing()
+    {
+        var csharpQuery = """
+                          static q => q.Posts(
+                          o => new
+                          {
+                              Image = o.On<ImageContent>()
+                                  .Select(oo => new { oo.ImageUrl, oo.Resolution }),
+                              Text = o.On<TextContent>()
+                                  .Select(oo => new { oo.Text }),
+                              Figure = o.On<FigureContent>()
+                                  .Select(oo => oo.Figure(ooo => new { Circle = ooo.On<Circle>().Select(oooo => new { oooo.Radius }) })),
+                              Int = o.On<IntegerContent>()
+                                  .Select(oo => new { oo.Text }),
+                          })
+                          """;
+
+        var project = await TestProject.Project
+            .ReplacePartOfDocumentAsync("Program.cs", (TestProject.MeQuery, csharpQuery));
+
+        var result = await project.Execute();
+
+        await Verify(result);
+    }
 
     [Fact]
     public async Task AppliedToWrongType()

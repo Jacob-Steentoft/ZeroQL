@@ -1,0 +1,19 @@
+﻿{
+  Query: query { posts { ... on ImageContent { imageUrl resolution } ... on TextContent { text } ... on FigureContent { figure { ... on Circle { radius } __typename }  } ... on IntegerContent { text } __typename } },
+  Errors: [
+    {
+      Message: Encountered fields for the same object that cannot be merged.,
+      Extensions: {
+        declaringTypeA: TextContent,
+        declaringTypeB: IntegerContent,
+        fieldA: text,
+        fieldB: text,
+        responseNameA: text,
+        responseNameB: text,
+        specifiedBy: https://spec.graphql.org/October2021/#sec-Field-Selection-Merging,
+        typeA: String!,
+        typeB: Int!
+      }
+    }
+  ]
+}

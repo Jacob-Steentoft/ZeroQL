@@ -53,6 +53,12 @@ type ImageContent {
   author: User!
 }
 
+type IntegerContent {
+  id: Int!
+  text: Int!
+  author: User!
+}
+
 type JsonDocument {
   rootElement: JSON!
 }
@@ -133,6 +139,7 @@ type Query {
   image: ImageContent!
   text: TextContent!
   figure: FigureContent!
+  integer: IntegerContent!
   me: User!
   currentUser: User! @deprecated(reason: "Use Me instead")
   MEWITHSUPPERCASING: User!
@@ -224,7 +231,7 @@ type lower_case_type_name {
   value: Int!
 }
 
-union PostContent = ImageContent | TextContent | FigureContent
+union PostContent = ImageContent | TextContent | FigureContent | IntegerContent
 
 input AddUsersInput {
   user: UserInfoInput

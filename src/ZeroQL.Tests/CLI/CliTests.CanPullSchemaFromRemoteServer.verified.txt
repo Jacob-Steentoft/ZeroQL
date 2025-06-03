@@ -137,6 +137,7 @@ type Query {
   image: ImageContent!
   text: TextContent!
   figure: FigureContent!
+  integer: IntegerContent!
   me: User!
   currentUser: User! @deprecated(reason: "Use Me instead")
   MEWITHSUPPERCASING: User!
@@ -247,6 +248,12 @@ input LimitInput {
 "The `Decimal` scalar type represents a decimal floating-point number."
 scalar Decimal
 
+type IntegerContent {
+  id: Int!
+  text: Int!
+  author: User!
+}
+
 "The `Byte` scalar type represents non-fractional whole numeric values. Byte can represent values between 0 and 255."
 scalar Byte
 
@@ -293,7 +300,7 @@ type Point implements IFigure & IEntity {
 
 scalar JSON
 
-union PostContent = ImageContent | TextContent | FigureContent
+union PostContent = ImageContent | TextContent | FigureContent | IntegerContent
 
 input UserInfoInput {
   firstName: String!
